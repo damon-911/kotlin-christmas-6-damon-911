@@ -1,10 +1,10 @@
 package christmas.view
 
-import christmas.util.Messages
+import christmas.util.Texts
 
 class OutputView {
 
     fun printGreetings() {
-        println(Messages.TEXT_START_GREETINGS.message)
+        println(Texts.MESSAGE_START_GREETINGS.text)
     }
 }

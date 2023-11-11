@@ -1,7 +1,24 @@
 package christmas.util
 
 enum class Values(val value: Int) {
-    // VALUE
-    VALUE_START_DATE(1),
-    VALUE_END_DATE(31),
+    // DATE
+    DATE_START(1),
+    DATE_END(31),
+
+    // PRICE
+    PRICE_TAPAS(5_500),
+    PRICE_SOUP(6_000),
+    PRICE_SALAD(8_000),
+
+    PRICE_CHRISTMAS_PASTA(25_000),
+    PRICE_SEAFOOD_PASTA(35_000),
+    PRICE_RIBS(54_000),
+    PRICE_STEAK(55_000),
+
+    PRICE_ICE_CREAM(5_000),
+    PRICE_CHOCOLATE_CAKE(15_000),
+
+    PRICE_ZERO_COLA(3_000),
+    PRICE_CHAMPAGNE(25_000),
+    PRICE_RED_WINE(60_000),
 }
