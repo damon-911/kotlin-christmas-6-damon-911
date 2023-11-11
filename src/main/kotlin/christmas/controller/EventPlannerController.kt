@@ -11,5 +11,6 @@ class EventPlannerController {
     fun startEventPlanner() {
         outputView.printGreetings()
         val date = inputView.readDate()
+        println(date)
     }
 }
