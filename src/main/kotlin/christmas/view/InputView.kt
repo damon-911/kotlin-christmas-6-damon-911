@@ -17,4 +17,16 @@ class InputView {
             }
         }
     }
+
+    fun readMenu(): String {
+        println(Messages.TEXT_INPUT_MENU.message)
+        while (true) {
+            try {
+                val input = Console.readLine()
+                return input
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+    }
 }
