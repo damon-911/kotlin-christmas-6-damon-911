@@ -20,7 +20,8 @@ class OutputView {
     fun printEventBenefits(date: Int, menu: List<Pair<String, Int>>) {
         println("12월 ${date}일에 ${Texts.MESSAGE_EVENT_BENEFITS.text}")
         printOrderedMenu(menu)
-        printTotalOrderAmountBeforeDiscount(menu)
+        val flag = printTotalOrderAmountBeforeDiscount(menu)
+        printGiftMenu(flag)
     }
 
     private fun printOrderedMenu(menu: List<Pair<String, Int>>) {
@@ -30,12 +31,21 @@ class OutputView {
         }
     }
 
-    private fun printTotalOrderAmountBeforeDiscount(menu: List<Pair<String, Int>>) {
+    private fun printTotalOrderAmountBeforeDiscount(menu: List<Pair<String, Int>>): Boolean {
         println("\n" + Texts.MESSAGE_TOTAL_ORDER_AMOUNT_BEFORE_DISCOUNT.text)
         var totalAmount = 0
         menu.forEach {
             totalAmount += RestaurantMenu.getMenuPrice(it.first) * it.second
         }
         println(String.format("%,d원", totalAmount))
+        return totalAmount >= 120_000
+    }
+
+    private fun printGiftMenu(flag: Boolean) {
+        println("\n" + Texts.MESSAGE_GIFT_MENU.text)
+        if (flag) {
+            println("\n" + Texts.MESSAGE_GIFT.text)
+        }
+        println(Texts.MESSAGE_NONE.text)
     }
 }

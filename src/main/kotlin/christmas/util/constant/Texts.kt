@@ -14,6 +14,8 @@ enum class Texts(val text: String) {
     MESSAGE_TOTAL_BENEFITS_AMOUNT("<총혜택 금액>"),
     MESSAGE_TOTAL_ORDER_AMOUNT_AFTER_DISCOUNT("<할인 후 예상 결제 금액>"),
     MESSAGE_EVENT_BADGE("<12월 이벤트 배지>"),
+
+    MESSAGE_GIFT("샴페인 1개"),
     MESSAGE_NONE("없음"),
 
     // EXCEPTION
