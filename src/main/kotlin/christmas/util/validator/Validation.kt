@@ -16,7 +16,7 @@ object Validation {
     }
 
     fun validateWrongMenuFormat(input: String) {
-        require(input.matches(Regex("[a-zA-Z]+-[0-9]+(,[a-zA-Z]+-[0-9]+)*"))) {
+        require(input.matches(Regex("[가-힣]+-[0-9]+(,[가-힣]+-[0-9]+)*$"))) {
             Texts.EXCEPTION_WRONG_MENU.text
         }
     }
