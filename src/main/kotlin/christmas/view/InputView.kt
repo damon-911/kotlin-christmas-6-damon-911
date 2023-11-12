@@ -1,8 +1,9 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
+import christmas.util.Validation.validateWrongMenuFormat
 import christmas.util.Validation.validateWrongDate
-import christmas.util.Validation.validateWrongMenu
+import christmas.util.Validation.validateWrongMenuInfo
 
 class InputView {
 
@@ -20,11 +21,11 @@ class InputView {
     fun readMenu(): List<Pair<String, Int>> {
         while (true) {
             try {
-                val input = Console.readLine()
+                val input = Console.readLine().replace(" ", "")
+                validateWrongMenuFormat(input)
                 val order = input.split(",")
                     .map {
-                        val menuInfo = it.split("-")
-                        validateWrongMenu(menuInfo)
+                        validateWrongMenuInfo(it)
                     }
                 return order
             } catch (e: Exception) {
