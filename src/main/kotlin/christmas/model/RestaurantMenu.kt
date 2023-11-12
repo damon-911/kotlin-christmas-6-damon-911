@@ -1,7 +1,7 @@
 package christmas.model
 
-import christmas.util.MenuInfo
-import christmas.util.Texts
+import christmas.util.constant.MenuInfo
+import christmas.util.constant.Texts
 import java.lang.IllegalArgumentException
 
 object RestaurantMenu {

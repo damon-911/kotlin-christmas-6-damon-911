@@ -1,4 +1,4 @@
-package christmas.util
+package christmas.util.constant
 
 enum class Texts(val text: String) {
     // MESSAGE

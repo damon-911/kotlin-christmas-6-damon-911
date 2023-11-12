@@ -1,10 +1,10 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.util.Validation.validateTotalMenus
-import christmas.util.Validation.validateWrongMenuFormat
-import christmas.util.Validation.validateWrongDate
-import christmas.util.Validation.validateWrongMenuInfo
+import christmas.util.validator.Validation.validateTotalMenus
+import christmas.util.validator.Validation.validateWrongMenuFormat
+import christmas.util.validator.Validation.validateWrongDate
+import christmas.util.validator.Validation.validateWrongMenuInfo
 
 class InputView {
 

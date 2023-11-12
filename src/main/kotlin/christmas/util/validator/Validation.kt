@@ -1,7 +1,9 @@
-package christmas.util
+package christmas.util.validator
 
 import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
+import christmas.util.constant.Texts
+import christmas.util.constant.Values
 
 object Validation {
 

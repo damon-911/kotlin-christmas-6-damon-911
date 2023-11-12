@@ -1,4 +1,4 @@
-package christmas.util
+package christmas.util.constant
 
 enum class Values(val value: Int) {
     // DATE

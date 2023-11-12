@@ -1,6 +1,6 @@
 package christmas.view
 
-import christmas.util.Texts
+import christmas.util.constant.Texts
 
 class OutputView {
 
