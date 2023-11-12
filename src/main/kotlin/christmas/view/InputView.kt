@@ -1,6 +1,7 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
+import christmas.util.Validation.validateTotalMenus
 import christmas.util.Validation.validateWrongMenuFormat
 import christmas.util.Validation.validateWrongDate
 import christmas.util.Validation.validateWrongMenuInfo
@@ -27,6 +28,7 @@ class InputView {
                     .map {
                         validateWrongMenuInfo(it)
                     }
+                validateTotalMenus(order)
                 return order
             } catch (e: Exception) {
                 println(e.message)

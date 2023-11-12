@@ -1,5 +1,8 @@
 package christmas.util
 
+import christmas.model.MenuCategory
+import christmas.model.RestaurantMenu
+
 object Validation {
 
     fun validateWrongDate(input: String): Int {
@@ -24,10 +27,49 @@ object Validation {
     }
 
     private fun validateMenuName(menuName: String): String {
+        require(RestaurantMenu.isMenuExist(menuName)) {
+            Texts.EXCEPTION_WRONG_MENU.text
+        }
         return menuName
     }
 
     private fun validateMenuCount(menuCount: String): Int {
-        return menuCount.toInt()
+        val count = menuCount.toIntOrNull() ?: throw NumberFormatException(Texts.EXCEPTION_WRONG_MENU.text)
+        require(count in Values.COUNT_MIN_MENU.value..Values.COUNT_MAX_MENU.value) {
+            Texts.EXCEPTION_WRONG_MENU.text
+        }
+        return count
+    }
+
+    fun validateTotalMenus(order: List<Pair<String, Int>>) {
+        validateDuplicateMenus(order)
+        validateOnlyBeverage(order)
+        validateTotalQuantity(order)
+    }
+
+    private fun validateDuplicateMenus(order: List<Pair<String, Int>>) {
+        val menuSet = mutableSetOf<String>()
+        order.forEach { (menu, _) ->
+            require(menuSet.add(menu)) {
+                Texts.EXCEPTION_WRONG_MENU.text
+            }
+        }
+    }
+
+    private fun validateOnlyBeverage(order: List<Pair<String, Int>>) {
+        val beverageCategories = setOf(MenuCategory.BEVERAGE)
+        val categories = order.map { (menu, _) ->
+            RestaurantMenu.getMenuCategory(menu)
+        }.toSet()
+        require(categories != beverageCategories) {
+            Texts.EXCEPTION_WRONG_MENU.text
+        }
+    }
+
+    private fun validateTotalQuantity(order: List<Pair<String, Int>>) {
+        val totalQuantity = order.sumOf { it.second }
+        require(totalQuantity <= 20) {
+            Texts.EXCEPTION_WRONG_MENU.text
+        }
     }
 }

@@ -1,10 +1,12 @@
 package christmas.model
 
 import christmas.util.MenuInfo
+import christmas.util.Texts
+import java.lang.IllegalArgumentException
 
-class RestaurantMenu {
+object RestaurantMenu {
 
-    val menus = listOf(
+    private val menus = listOf(
         Menu(MenuInfo.TAPAS.menuName, MenuCategory.APPETIZER, MenuInfo.TAPAS.price),
         Menu(MenuInfo.SOUP.menuName, MenuCategory.APPETIZER, MenuInfo.SOUP.price),
         Menu(MenuInfo.SALAD.menuName, MenuCategory.APPETIZER, MenuInfo.SALAD.price),
@@ -18,4 +20,13 @@ class RestaurantMenu {
         Menu(MenuInfo.CHAMPAGNE.menuName, MenuCategory.BEVERAGE, MenuInfo.CHAMPAGNE.price),
         Menu(MenuInfo.RED_WINE.menuName, MenuCategory.BEVERAGE, MenuInfo.RED_WINE.price)
     )
+
+    fun isMenuExist(menuName: String): Boolean {
+        return menus.any { it.name == menuName }
+    }
+
+    fun getMenuCategory(menuName: String): MenuCategory {
+        return menus.find { it.name == menuName }?.category
+            ?: throw IllegalArgumentException(Texts.EXCEPTION_WRONG_MENU.text)
+    }
 }
