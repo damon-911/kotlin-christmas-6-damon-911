@@ -10,7 +10,17 @@ class EventPlannerController {
 
     fun startEventPlanner() {
         outputView.printGreetings()
+        inputDate()
+        inputMenu()
+    }
+
+    private fun inputDate() {
+        outputView.printInputDate()
         val date = inputView.readDate()
+    }
+
+    private fun inputMenu() {
+        outputView.printInputMenu()
         val menu = inputView.readMenu()
     }
 }
