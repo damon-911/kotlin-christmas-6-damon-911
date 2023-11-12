@@ -29,7 +29,6 @@ class EventPlannerController {
     }
 
     private fun showEventBenefits() {
-        outputView.printEventBenefits(date)
-        outputView.printOrderedMenu(menu)
+        outputView.printEventBenefits(date, menu)
     }
 }

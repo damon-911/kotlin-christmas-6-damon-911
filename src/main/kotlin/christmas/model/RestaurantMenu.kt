@@ -29,4 +29,8 @@ object RestaurantMenu {
         return menus.find { it.name == menuName }?.category
             ?: throw IllegalArgumentException(Texts.EXCEPTION_WRONG_MENU.text)
     }
+
+    fun getMenuPrice(menuName: String): Int {
+        return menus.find { it.name == menuName }!!.price
+    }
 }
