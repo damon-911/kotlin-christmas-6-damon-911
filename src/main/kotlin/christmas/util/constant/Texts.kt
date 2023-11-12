@@ -18,6 +18,12 @@ enum class Texts(val text: String) {
     MESSAGE_GIFT("샴페인 1개"),
     MESSAGE_NONE("없음"),
 
+    MESSAGE_BENEFITS_CHRISTMAS("크리스마스 디데이 할인: "),
+    MESSAGE_BENEFITS_WEEKDAY("평일 할인: "),
+    MESSAGE_BENEFITS_WEEKEND("주말 할인: "),
+    MESSAGE_BENEFITS_SPECIAL("특별 할인: "),
+    MESSAGE_BENEFITS_GIFT("증정 이벤트: "),
+
     // EXCEPTION
     EXCEPTION_WRONG_DATE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),
     EXCEPTION_WRONG_MENU("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),

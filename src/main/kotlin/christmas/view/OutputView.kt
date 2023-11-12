@@ -22,6 +22,7 @@ class OutputView {
         printOrderedMenu(menu)
         val flag = printTotalOrderAmountBeforeDiscount(menu)
         printGiftMenu(flag)
+        printBenefitsDetail(date, menu)
     }
 
     private fun printOrderedMenu(menu: List<Pair<String, Int>>) {
@@ -44,8 +45,23 @@ class OutputView {
     private fun printGiftMenu(flag: Boolean) {
         println("\n" + Texts.MESSAGE_GIFT_MENU.text)
         if (flag) {
-            println("\n" + Texts.MESSAGE_GIFT.text)
+            println(Texts.MESSAGE_GIFT.text)
+            return
         }
         println(Texts.MESSAGE_NONE.text)
+    }
+
+    private fun printBenefitsDetail(date: Int, menu: List<Pair<String, Int>>) {
+        println("\n" + Texts.MESSAGE_BENEFITS_DETAIL.text)
+        var totalDiscount = 0
+        totalDiscount += checkChristmasDiscount(date)
+    }
+
+    private fun checkChristmasDiscount(date: Int): Int {
+        val discount = -(1000 + (date - 1) * 100)
+        if (date in 1..25) {
+            println(Texts.MESSAGE_BENEFITS_CHRISTMAS.text + String.format("%,d원", discount))
+        }
+        return discount
     }
 }
