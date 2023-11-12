@@ -1,22 +1,21 @@
 package christmas.model
 
-import christmas.util.Texts
-import christmas.util.Values
+import christmas.util.MenuInfo
 
 class RestaurantMenu {
 
     val menus = listOf(
-        Menu(Texts.NAME_TAPAS.text, MenuCategory.APPETIZER, Values.PRICE_TAPAS.value),
-        Menu(Texts.NAME_SOUP.text, MenuCategory.APPETIZER, Values.PRICE_SOUP.value),
-        Menu(Texts.NAME_SALAD.text, MenuCategory.APPETIZER, Values.PRICE_SALAD.value),
-        Menu(Texts.NAME_CHRISTMAS_PASTA.text, MenuCategory.MAIN, Values.PRICE_CHRISTMAS_PASTA.value),
-        Menu(Texts.NAME_SEAFOOD_PASTA.text, MenuCategory.MAIN, Values.PRICE_SEAFOOD_PASTA.value),
-        Menu(Texts.NAME_RIBS.text, MenuCategory.MAIN, Values.PRICE_RIBS.value),
-        Menu(Texts.NAME_STEAK.text, MenuCategory.MAIN, Values.PRICE_STEAK.value),
-        Menu(Texts.NAME_ICE_CREAM.text, MenuCategory.DESSERT, Values.PRICE_ICE_CREAM.value),
-        Menu(Texts.NAME_CHOCOLATE_CAKE.text, MenuCategory.DESSERT, Values.PRICE_CHOCOLATE_CAKE.value),
-        Menu(Texts.NAME_ZERO_COLA.text, MenuCategory.BEVERAGE, Values.PRICE_ZERO_COLA.value),
-        Menu(Texts.NAME_CHAMPAGNE.text, MenuCategory.BEVERAGE, Values.PRICE_CHAMPAGNE.value),
-        Menu(Texts.NAME_RED_WINE.text, MenuCategory.BEVERAGE, Values.PRICE_RED_WINE.value)
+        Menu(MenuInfo.TAPAS.menuName, MenuCategory.APPETIZER, MenuInfo.TAPAS.price),
+        Menu(MenuInfo.SOUP.menuName, MenuCategory.APPETIZER, MenuInfo.SOUP.price),
+        Menu(MenuInfo.SALAD.menuName, MenuCategory.APPETIZER, MenuInfo.SALAD.price),
+        Menu(MenuInfo.CHRISTMAS_PASTA.menuName, MenuCategory.MAIN, MenuInfo.CHRISTMAS_PASTA.price),
+        Menu(MenuInfo.SEAFOOD_PASTA.menuName, MenuCategory.MAIN, MenuInfo.SEAFOOD_PASTA.price),
+        Menu(MenuInfo.RIBS.menuName, MenuCategory.MAIN, MenuInfo.RIBS.price),
+        Menu(MenuInfo.STEAK.menuName, MenuCategory.MAIN, MenuInfo.STEAK.price),
+        Menu(MenuInfo.ICE_CREAM.menuName, MenuCategory.DESSERT, MenuInfo.ICE_CREAM.price),
+        Menu(MenuInfo.CHOCOLATE_CAKE.menuName, MenuCategory.DESSERT, MenuInfo.CHOCOLATE_CAKE.price),
+        Menu(MenuInfo.ZERO_COLA.menuName, MenuCategory.BEVERAGE, MenuInfo.ZERO_COLA.price),
+        Menu(MenuInfo.CHAMPAGNE.menuName, MenuCategory.BEVERAGE, MenuInfo.CHAMPAGNE.price),
+        Menu(MenuInfo.RED_WINE.menuName, MenuCategory.BEVERAGE, MenuInfo.RED_WINE.price)
     )
 }

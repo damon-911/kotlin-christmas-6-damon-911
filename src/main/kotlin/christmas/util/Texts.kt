@@ -8,21 +8,4 @@ enum class Texts(val text: String) {
 
     // EXCEPTION
     EXCEPTION_WRONG_DATE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),
-
-    // MENU
-    NAME_TAPAS("타파스"),
-    NAME_SOUP("양송이수프"),
-    NAME_SALAD("시저샐러드"),
-
-    NAME_CHRISTMAS_PASTA("크리스마스파스타"),
-    NAME_SEAFOOD_PASTA("해산물파스타"),
-    NAME_RIBS("해산물파스타"),
-    NAME_STEAK("티본스테이크"),
-
-    NAME_ICE_CREAM("아이스크림"),
-    NAME_CHOCOLATE_CAKE("초코케이크"),
-
-    NAME_ZERO_COLA("제로콜라"),
-    NAME_CHAMPAGNE("샴페인"),
-    NAME_RED_WINE("레드와인"),
 }
