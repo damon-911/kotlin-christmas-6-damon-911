@@ -8,19 +8,28 @@ class EventPlannerController {
     private val inputView: InputView by lazy { InputView() }
     private val outputView: OutputView by lazy { OutputView() }
 
+    private lateinit var menu: List<Pair<String, Int>>
+    private var date = 0
+
     fun startEventPlanner() {
         outputView.printGreetings()
         inputDate()
         inputMenu()
+        showEventBenefits()
     }
 
     private fun inputDate() {
         outputView.printInputDate()
-        val date = inputView.readDate()
+        date = inputView.readDate()
     }
 
     private fun inputMenu() {
         outputView.printInputMenu()
-        val menu = inputView.readMenu()
+        menu = inputView.readMenu()
+    }
+
+    private fun showEventBenefits() {
+        outputView.printEventBenefits(date)
+        outputView.printOrderedMenu(menu)
     }
 }

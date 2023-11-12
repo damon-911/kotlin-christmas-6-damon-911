@@ -15,4 +15,15 @@ class OutputView {
     fun printInputMenu() {
         println(Texts.MESSAGE_INPUT_MENU.text)
     }
+
+    fun printEventBenefits(date: Int) {
+        println("12월 ${date}일에 ${Texts.MESSAGE_EVENT_BENEFITS.text}\n")
+    }
+
+    fun printOrderedMenu(menu: List<Pair<String, Int>>) {
+        println(Texts.MESSAGE_ORDERED_MENU.text)
+        menu.forEach {
+            println("${it.first} ${it.second}개")
+        }
+    }
 }
