@@ -1,6 +1,5 @@
 package christmas.model
 
-import christmas.util.constant.MenuInfo
 import christmas.util.constant.Texts
 import java.lang.IllegalArgumentException
 
