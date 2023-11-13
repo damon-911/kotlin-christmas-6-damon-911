@@ -1,5 +1,6 @@
 package christmas.controller
 
+import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -58,6 +59,7 @@ class EventPlannerController {
         outputView.printBenefitsDetail()
         var totalDiscount = 0
         totalDiscount += checkChristmasDiscount()
+        totalDiscount += checkWeekdayOrWeekendDiscount()
         return totalDiscount
     }
 
@@ -68,5 +70,34 @@ class EventPlannerController {
             return discount
         }
         return 0
+    }
+
+    private fun checkWeekdayOrWeekendDiscount(): Int {
+        if (date % 7 == 1 || date % 7 == 2) {
+            return checkWeekendDiscount()
+        }
+        return checkWeekdayDiscount()
+    }
+
+    private fun checkWeekendDiscount(): Int {
+        var discount = 0
+        menu.forEach {
+            if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.MAIN) {
+                discount += -2_023 * it.second
+            }
+        }
+        outputView.printWeekendDiscount(discount)
+        return discount
+    }
+
+    private fun checkWeekdayDiscount(): Int {
+        var discount = 0
+        menu.forEach {
+            if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.DESSERT) {
+                discount += -2_023 * it.second
+            }
+        }
+        outputView.printWeekdayDiscount(discount)
+        return discount
     }
 }

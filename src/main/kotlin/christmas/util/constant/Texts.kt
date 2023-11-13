@@ -19,8 +19,8 @@ enum class Texts(val text: String) {
     MESSAGE_NONE("없음"),
 
     MESSAGE_BENEFITS_CHRISTMAS("크리스마스 디데이 할인: "),
-    MESSAGE_BENEFITS_WEEKDAY("평일 할인: "),
     MESSAGE_BENEFITS_WEEKEND("주말 할인: "),
+    MESSAGE_BENEFITS_WEEKDAY("평일 할인: "),
     MESSAGE_BENEFITS_SPECIAL("특별 할인: "),
     MESSAGE_BENEFITS_GIFT("증정 이벤트: "),
 

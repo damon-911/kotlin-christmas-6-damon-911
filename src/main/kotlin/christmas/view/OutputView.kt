@@ -48,4 +48,12 @@ class OutputView {
     fun printChristmasDiscount(discount: Int) {
         println(Texts.MESSAGE_BENEFITS_CHRISTMAS.text + String.format("%,d원", discount))
     }
+
+    fun printWeekendDiscount(discount: Int) {
+        println(Texts.MESSAGE_BENEFITS_WEEKEND.text + String.format("%,d원", discount))
+    }
+
+    fun printWeekdayDiscount(discount: Int) {
+        println(Texts.MESSAGE_BENEFITS_WEEKDAY.text + String.format("%,d원", discount))
+    }
 }
