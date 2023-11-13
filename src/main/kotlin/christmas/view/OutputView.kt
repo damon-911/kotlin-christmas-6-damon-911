@@ -1,7 +1,6 @@
 package christmas.view
 
 import christmas.util.constant.Texts
-import christmas.util.constant.Values
 
 class OutputView {
 
@@ -33,9 +32,9 @@ class OutputView {
         println(String.format("%,d원", totalAmount))
     }
 
-    fun printGiftMenu(totalOrderAmount: Int) {
+    fun printGiftMenu(flag: Boolean) {
         println("\n" + Texts.MESSAGE_GIFT_MENU.text)
-        if (totalOrderAmount >= Values.COUNT_GIFT_THRESHOLD.value) {
+        if (flag) {
             println(Texts.MESSAGE_GIFT.text)
             return
         }
@@ -60,5 +59,9 @@ class OutputView {
 
     fun printSpecialDiscount() {
         println(Texts.MESSAGE_BENEFITS_SPECIAL.text)
+    }
+
+    fun printGiftEvent() {
+        println(Texts.MESSAGE_BENEFITS_GIFT.text)
     }
 }

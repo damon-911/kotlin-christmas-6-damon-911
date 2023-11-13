@@ -9,8 +9,11 @@ enum class Values(val value: Int) {
     // COUNT
     COUNT_MIN_MENU(1),
     COUNT_MAX_MENU(20),
-    COUNT_GIFT_THRESHOLD(120_000),
     COUNT_WEEK(7),
+
+    // PRICE
+    PRICE_GIFT_THRESHOLD(120_000),
+    PRICE_GIFT_EVENT(25_000),
 
     // DISCOUNT
     DISCOUNT_CHRISTMAS_START(1_000),

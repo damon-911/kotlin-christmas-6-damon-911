@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
+import christmas.util.constant.Texts
 import christmas.util.constant.Values
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -35,8 +36,8 @@ class EventPlannerController {
         outputView.printEventBenefits(date)
         showOrderedMenu()
         val totalOrderAmount = showTotalOrderAmountBeforeDiscount()
-        showGiftMenu(totalOrderAmount)
-        val totalBenefitsAmount = showBenefitsDetail()
+        val flag = showGiftMenu(totalOrderAmount)
+        val totalBenefitsAmount = showBenefitsDetail(flag)
     }
 
     private fun showOrderedMenu() {
@@ -52,16 +53,25 @@ class EventPlannerController {
         return total
     }
 
-    private fun showGiftMenu(totalOrderAmount: Int) {
-        outputView.printGiftMenu(totalOrderAmount)
+    private fun showGiftMenu(totalOrderAmount: Int): Boolean {
+        if (totalOrderAmount >= Values.PRICE_GIFT_THRESHOLD.value) {
+            outputView.printGiftMenu(true)
+            return true
+        }
+        outputView.printGiftMenu(false)
+        return false
     }
 
-    private fun showBenefitsDetail(): Int {
+    private fun showBenefitsDetail(flag: Boolean): Int {
         outputView.printBenefitsDetail()
         var totalDiscount = 0
         totalDiscount += checkChristmasDiscount()
         totalDiscount += checkWeekdayOrWeekendDiscount()
         totalDiscount += checkSpecialDiscount()
+        totalDiscount += checkGiftEvent(flag)
+        if (totalDiscount == 0) {
+            println(Texts.MESSAGE_NONE.text)
+        }
         return totalDiscount
     }
 
@@ -89,7 +99,9 @@ class EventPlannerController {
                 discount += -Values.DISCOUNT_WEEKEND_OR_WEEKDAY.value * it.second
             }
         }
-        outputView.printWeekendDiscount(discount)
+        if (discount != 0) {
+            outputView.printWeekendDiscount(discount)
+        }
         return discount
     }
 
@@ -100,7 +112,9 @@ class EventPlannerController {
                 discount += -Values.DISCOUNT_WEEKEND_OR_WEEKDAY.value * it.second
             }
         }
-        outputView.printWeekdayDiscount(discount)
+        if (discount != 0) {
+            outputView.printWeekdayDiscount(discount)
+        }
         return discount
     }
 
@@ -108,6 +122,14 @@ class EventPlannerController {
         if (date % Values.COUNT_WEEK.value == 3 || date == Values.DATE_CHRISTMAS.value) {
             outputView.printSpecialDiscount()
             return -Values.DISCOUNT_SPECIAL.value
+        }
+        return 0
+    }
+
+    private fun checkGiftEvent(flag: Boolean): Int {
+        if (flag) {
+            outputView.printGiftEvent()
+            return -Values.PRICE_GIFT_EVENT.value
         }
         return 0
     }
