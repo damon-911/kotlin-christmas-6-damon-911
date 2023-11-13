@@ -71,11 +71,7 @@ class OutputView {
 
     fun printTotalBenefitsAmount(totalBenefitsAmount: Int) {
         println("\n" + Texts.MESSAGE_TOTAL_BENEFITS_AMOUNT.text)
-        if (totalBenefitsAmount != 0) {
-            println(String.format("%,d원", totalBenefitsAmount))
-            return
-        }
-        printNone()
+        println(String.format("%,d원", totalBenefitsAmount))
     }
 
     fun printTotalOrderAmountAfterDiscount(totalAmount: Int) {
