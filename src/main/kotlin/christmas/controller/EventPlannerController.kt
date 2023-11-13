@@ -12,42 +12,39 @@ class EventPlannerController {
     private val inputView: InputView by lazy { InputView() }
     private val outputView: OutputView by lazy { OutputView() }
 
-    private lateinit var menu: List<Pair<String, Int>>
-    private var date = 0
-
     fun startEventPlanner() {
         outputView.printGreetings()
-        inputDate()
-        inputMenu()
-        showEventBenefits()
+        val date = inputDate()
+        val menu = inputMenu()
+        showEventBenefits(date, menu)
     }
 
-    private fun inputDate() {
+    private fun inputDate(): Int {
         outputView.printInputDate()
-        date = inputView.readDate()
+        return inputView.readDate()
     }
 
-    private fun inputMenu() {
+    private fun inputMenu(): List<Pair<String, Int>> {
         outputView.printInputMenu()
-        menu = inputView.readMenu()
+        return inputView.readMenu()
     }
 
-    private fun showEventBenefits() {
+    private fun showEventBenefits(date: Int, menu: List<Pair<String, Int>>) {
         outputView.printEventBenefits(date)
-        showOrderedMenu()
-        val totalOrderAmount = showTotalOrderAmountBeforeDiscount()
+        showOrderedMenu(menu)
+        val totalOrderAmount = showTotalOrderAmountBeforeDiscount(menu)
         val flag = showGiftMenu(totalOrderAmount)
-        val totalBenefitsAmount = showBenefitsDetail(flag)
+        val totalBenefitsAmount = showBenefitsDetail(date, menu, flag)
         showTotalBenefitsAmount(totalBenefitsAmount)
         showTotalOrderAmountAfterDiscount(totalOrderAmount + totalBenefitsAmount, flag)
         showEventBadge(totalBenefitsAmount)
     }
 
-    private fun showOrderedMenu() {
+    private fun showOrderedMenu(menu: List<Pair<String, Int>>) {
         outputView.printOrderedMenu(menu)
     }
 
-    private fun showTotalOrderAmountBeforeDiscount(): Int {
+    private fun showTotalOrderAmountBeforeDiscount(menu: List<Pair<String, Int>>): Int {
         var total = 0
         menu.forEach {
             total += RestaurantMenu.getMenuPrice(it.first) * it.second
@@ -65,12 +62,12 @@ class EventPlannerController {
         return false
     }
 
-    private fun showBenefitsDetail(flag: Boolean): Int {
+    private fun showBenefitsDetail(date: Int, menu: List<Pair<String, Int>>, flag: Boolean): Int {
         outputView.printBenefitsDetail()
         var totalDiscount = 0
-        totalDiscount += checkChristmasDiscount()
-        totalDiscount += checkWeekdayOrWeekendDiscount()
-        totalDiscount += checkSpecialDiscount()
+        totalDiscount += checkChristmasDiscount(date)
+        totalDiscount += checkWeekdayOrWeekendDiscount(date, menu)
+        totalDiscount += checkSpecialDiscount(date)
         totalDiscount += checkGiftEvent(flag)
         if (totalDiscount == 0) {
             outputView.printNone()
@@ -78,7 +75,7 @@ class EventPlannerController {
         return totalDiscount
     }
 
-    private fun checkChristmasDiscount(): Int {
+    private fun checkChristmasDiscount(date: Int): Int {
         if (date in Values.DATE_START.value..Values.DATE_CHRISTMAS.value) {
             val discount =
                 -(Values.DISCOUNT_CHRISTMAS_START.value + (date - 1) * Values.DISCOUNT_CHRISTMAS_EACH_DAY.value)
@@ -88,14 +85,14 @@ class EventPlannerController {
         return 0
     }
 
-    private fun checkWeekdayOrWeekendDiscount(): Int {
+    private fun checkWeekdayOrWeekendDiscount(date: Int, menu: List<Pair<String, Int>>): Int {
         if (date % Values.COUNT_WEEK.value == 1 || date % Values.COUNT_WEEK.value == 2) {
-            return checkWeekendDiscount()
+            return checkWeekendDiscount(menu)
         }
-        return checkWeekdayDiscount()
+        return checkWeekdayDiscount(menu)
     }
 
-    private fun checkWeekendDiscount(): Int {
+    private fun checkWeekendDiscount(menu: List<Pair<String, Int>>): Int {
         var discount = 0
         menu.forEach {
             if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.MAIN) {
@@ -108,7 +105,7 @@ class EventPlannerController {
         return discount
     }
 
-    private fun checkWeekdayDiscount(): Int {
+    private fun checkWeekdayDiscount(menu: List<Pair<String, Int>>): Int {
         var discount = 0
         menu.forEach {
             if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.DESSERT) {
@@ -121,7 +118,7 @@ class EventPlannerController {
         return discount
     }
 
-    private fun checkSpecialDiscount(): Int {
+    private fun checkSpecialDiscount(date: Int): Int {
         if (date % Values.COUNT_WEEK.value == 3 || date == Values.DATE_CHRISTMAS.value) {
             outputView.printSpecialDiscount()
             return -Values.DISCOUNT_SPECIAL.value
