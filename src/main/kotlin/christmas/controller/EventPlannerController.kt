@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
+import christmas.util.constant.Texts
 import christmas.util.constant.Values
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -39,6 +40,7 @@ class EventPlannerController {
         val totalBenefitsAmount = showBenefitsDetail(flag)
         showTotalBenefitsAmount(totalBenefitsAmount)
         showTotalOrderAmountAfterDiscount(totalOrderAmount + totalBenefitsAmount, flag)
+        showEventBadge(totalBenefitsAmount)
     }
 
     private fun showOrderedMenu() {
@@ -145,5 +147,15 @@ class EventPlannerController {
             return
         }
         outputView.printTotalOrderAmountAfterDiscount(totalAmount)
+    }
+
+    private fun showEventBadge(totalBenefitsAmount: Int) {
+        val badge = when {
+            totalBenefitsAmount <= -20_000 -> Texts.BADGE_SANTA.text
+            totalBenefitsAmount <= -10_000 -> Texts.BADGE_TREE.text
+            totalBenefitsAmount <= -5_000 -> Texts.BADGE_STAR.text
+            else -> Texts.MESSAGE_NONE.text
+        }
+        outputView.printEventBadge(badge)
     }
 }

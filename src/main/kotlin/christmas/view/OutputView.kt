@@ -16,7 +16,7 @@ class OutputView {
         println(Texts.MESSAGE_INPUT_MENU.text)
     }
 
-   fun printNone() {
+    fun printNone() {
         println(Texts.MESSAGE_NONE.text)
     }
 
@@ -81,5 +81,10 @@ class OutputView {
     fun printTotalOrderAmountAfterDiscount(totalAmount: Int) {
         println("\n" + Texts.MESSAGE_TOTAL_ORDER_AMOUNT_AFTER_DISCOUNT.text)
         println(String.format("%,d원", totalAmount))
+    }
+
+    fun printEventBadge(badge: String) {
+        println("\n" + Texts.MESSAGE_EVENT_BADGE.text)
+        println(badge)
     }
 }

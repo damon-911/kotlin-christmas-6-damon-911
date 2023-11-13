@@ -24,6 +24,11 @@ enum class Texts(val text: String) {
     MESSAGE_BENEFITS_SPECIAL("특별 할인: -1,000원"),
     MESSAGE_BENEFITS_GIFT("증정 이벤트: -25,000원"),
 
+    // BADGE
+    BADGE_SANTA("산타"),
+    BADGE_TREE("트리"),
+    BADGE_STAR("별"),
+
     // EXCEPTION
     EXCEPTION_WRONG_DATE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),
     EXCEPTION_WRONG_MENU("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."),
