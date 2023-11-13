@@ -5,6 +5,7 @@ import christmas.util.validator.Validation.validateTotalMenus
 import christmas.util.validator.Validation.validateWrongMenuFormat
 import christmas.util.validator.Validation.validateWrongDate
 import christmas.util.validator.Validation.validateWrongMenuInfo
+import java.lang.IllegalArgumentException
 
 class InputView {
 
@@ -13,7 +14,7 @@ class InputView {
             try {
                 val input = Console.readLine()
                 return validateWrongDate(input)
-            } catch (e: Exception) {
+            } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
@@ -30,7 +31,7 @@ class InputView {
                     }
                 validateTotalMenus(order)
                 return order
-            } catch (e: Exception) {
+            } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
         }
