@@ -21,8 +21,8 @@ enum class Texts(val text: String) {
     MESSAGE_BENEFITS_CHRISTMAS("크리스마스 디데이 할인: "),
     MESSAGE_BENEFITS_WEEKEND("주말 할인: "),
     MESSAGE_BENEFITS_WEEKDAY("평일 할인: "),
-    MESSAGE_BENEFITS_SPECIAL("특별 할인: "),
-    MESSAGE_BENEFITS_GIFT("증정 이벤트: "),
+    MESSAGE_BENEFITS_SPECIAL("특별 할인: -1,000원"),
+    MESSAGE_BENEFITS_GIFT("증정 이벤트: -25,000원"),
 
     // EXCEPTION
     EXCEPTION_WRONG_DATE("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요."),

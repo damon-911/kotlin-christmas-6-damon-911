@@ -2,6 +2,7 @@ package christmas.controller
 
 import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
+import christmas.util.constant.Values
 import christmas.view.InputView
 import christmas.view.OutputView
 
@@ -60,12 +61,14 @@ class EventPlannerController {
         var totalDiscount = 0
         totalDiscount += checkChristmasDiscount()
         totalDiscount += checkWeekdayOrWeekendDiscount()
+        totalDiscount += checkSpecialDiscount()
         return totalDiscount
     }
 
     private fun checkChristmasDiscount(): Int {
-        if (date in 1..25) {
-            val discount = -(1000 + (date - 1) * 100)
+        if (date in Values.DATE_START.value..Values.DATE_CHRISTMAS.value) {
+            val discount =
+                -(Values.DISCOUNT_CHRISTMAS_START.value + (date - 1) * Values.DISCOUNT_CHRISTMAS_EACH_DAY.value)
             outputView.printChristmasDiscount(discount)
             return discount
         }
@@ -73,7 +76,7 @@ class EventPlannerController {
     }
 
     private fun checkWeekdayOrWeekendDiscount(): Int {
-        if (date % 7 == 1 || date % 7 == 2) {
+        if (date % Values.COUNT_WEEK.value == 1 || date % Values.COUNT_WEEK.value == 2) {
             return checkWeekendDiscount()
         }
         return checkWeekdayDiscount()
@@ -83,7 +86,7 @@ class EventPlannerController {
         var discount = 0
         menu.forEach {
             if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.MAIN) {
-                discount += -2_023 * it.second
+                discount += -Values.DISCOUNT_WEEKEND_OR_WEEKDAY.value * it.second
             }
         }
         outputView.printWeekendDiscount(discount)
@@ -94,10 +97,18 @@ class EventPlannerController {
         var discount = 0
         menu.forEach {
             if (RestaurantMenu.getMenuCategory(it.first) == MenuCategory.DESSERT) {
-                discount += -2_023 * it.second
+                discount += -Values.DISCOUNT_WEEKEND_OR_WEEKDAY.value * it.second
             }
         }
         outputView.printWeekdayDiscount(discount)
         return discount
+    }
+
+    private fun checkSpecialDiscount(): Int {
+        if (date % Values.COUNT_WEEK.value == 3 || date == Values.DATE_CHRISTMAS.value) {
+            outputView.printSpecialDiscount()
+            return -Values.DISCOUNT_SPECIAL.value
+        }
+        return 0
     }
 }
