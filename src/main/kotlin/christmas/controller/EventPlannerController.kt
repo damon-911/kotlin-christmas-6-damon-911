@@ -34,7 +34,7 @@ class EventPlannerController {
         showOrderedMenu(menu)
         val totalOrderAmount = showTotalOrderAmountBeforeDiscount(menu)
         val flag = showGiftMenu(totalOrderAmount)
-        val totalBenefitsAmount = showBenefitsDetail(date, menu, flag)
+        val totalBenefitsAmount = showBenefitsDetail(date, menu, totalOrderAmount, flag)
         showTotalBenefitsAmount(totalBenefitsAmount)
         showTotalOrderAmountAfterDiscount(totalOrderAmount + totalBenefitsAmount, flag)
         showEventBadge(totalBenefitsAmount)
@@ -44,7 +44,7 @@ class EventPlannerController {
         outputView.printOrderedMenu(menu)
     }
 
-    private fun showTotalOrderAmountBeforeDiscount(menu: List<Pair<String, Int>>): Int {
+    fun showTotalOrderAmountBeforeDiscount(menu: List<Pair<String, Int>>): Int {
         var total = 0
         menu.forEach {
             total += RestaurantMenu.getMenuPrice(it.first) * it.second
@@ -53,7 +53,7 @@ class EventPlannerController {
         return total
     }
 
-    private fun showGiftMenu(totalOrderAmount: Int): Boolean {
+    fun showGiftMenu(totalOrderAmount: Int): Boolean {
         if (totalOrderAmount >= Values.PRICE_GIFT_THRESHOLD.value) {
             outputView.printGiftMenu(true)
             return true
@@ -62,8 +62,17 @@ class EventPlannerController {
         return false
     }
 
-    private fun showBenefitsDetail(date: Int, menu: List<Pair<String, Int>>, flag: Boolean): Int {
+    private fun showBenefitsDetail(
+        date: Int,
+        menu: List<Pair<String, Int>>,
+        totalOrderAmount: Int,
+        flag: Boolean
+    ): Int {
         outputView.printBenefitsDetail()
+        if (totalOrderAmount < Values.PRICE_EVENT_THRESHOLD.value) {
+            outputView.printNone()
+            return 0
+        }
         var totalDiscount = 0
         totalDiscount += checkChristmasDiscount(date)
         totalDiscount += checkWeekdayOrWeekendDiscount(date, menu)
@@ -75,7 +84,7 @@ class EventPlannerController {
         return totalDiscount
     }
 
-    private fun checkChristmasDiscount(date: Int): Int {
+    fun checkChristmasDiscount(date: Int): Int {
         if (date in Values.DATE_START.value..Values.DATE_CHRISTMAS.value) {
             val discount =
                 -(Values.DISCOUNT_CHRISTMAS_START.value + (date - 1) * Values.DISCOUNT_CHRISTMAS_EACH_DAY.value)
@@ -85,7 +94,7 @@ class EventPlannerController {
         return 0
     }
 
-    private fun checkWeekdayOrWeekendDiscount(date: Int, menu: List<Pair<String, Int>>): Int {
+    fun checkWeekdayOrWeekendDiscount(date: Int, menu: List<Pair<String, Int>>): Int {
         if (date % Values.COUNT_WEEK.value == 1 || date % Values.COUNT_WEEK.value == 2) {
             return checkWeekendDiscount(menu)
         }
@@ -118,7 +127,7 @@ class EventPlannerController {
         return discount
     }
 
-    private fun checkSpecialDiscount(date: Int): Int {
+    fun checkSpecialDiscount(date: Int): Int {
         if (date % Values.COUNT_WEEK.value == 3 || date == Values.DATE_CHRISTMAS.value) {
             outputView.printSpecialDiscount()
             return -Values.DISCOUNT_SPECIAL.value
@@ -126,7 +135,7 @@ class EventPlannerController {
         return 0
     }
 
-    private fun checkGiftEvent(flag: Boolean): Int {
+    fun checkGiftEvent(flag: Boolean): Int {
         if (flag) {
             outputView.printGiftEvent()
             return -Values.PRICE_GIFT_EVENT.value

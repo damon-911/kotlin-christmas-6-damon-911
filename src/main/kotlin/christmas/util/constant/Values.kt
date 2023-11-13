@@ -12,6 +12,7 @@ enum class Values(val value: Int) {
     COUNT_WEEK(7),
 
     // PRICE
+    PRICE_EVENT_THRESHOLD(10_000),
     PRICE_GIFT_THRESHOLD(120_000),
     PRICE_GIFT_EVENT(25_000),
 
