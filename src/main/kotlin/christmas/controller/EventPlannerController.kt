@@ -2,7 +2,6 @@ package christmas.controller
 
 import christmas.model.MenuCategory
 import christmas.model.RestaurantMenu
-import christmas.util.constant.Texts
 import christmas.util.constant.Values
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -38,6 +37,7 @@ class EventPlannerController {
         val totalOrderAmount = showTotalOrderAmountBeforeDiscount()
         val flag = showGiftMenu(totalOrderAmount)
         val totalBenefitsAmount = showBenefitsDetail(flag)
+        showTotalBenefitsAmount(totalBenefitsAmount)
     }
 
     private fun showOrderedMenu() {
@@ -70,7 +70,7 @@ class EventPlannerController {
         totalDiscount += checkSpecialDiscount()
         totalDiscount += checkGiftEvent(flag)
         if (totalDiscount == 0) {
-            println(Texts.MESSAGE_NONE.text)
+            outputView.printNone()
         }
         return totalDiscount
     }
@@ -132,5 +132,9 @@ class EventPlannerController {
             return -Values.PRICE_GIFT_EVENT.value
         }
         return 0
+    }
+
+    private fun showTotalBenefitsAmount(totalBenefitsAmount: Int) {
+        outputView.printTotalBenefitsAmount(totalBenefitsAmount)
     }
 }
