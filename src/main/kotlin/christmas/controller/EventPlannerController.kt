@@ -38,6 +38,7 @@ class EventPlannerController {
         val flag = showGiftMenu(totalOrderAmount)
         val totalBenefitsAmount = showBenefitsDetail(flag)
         showTotalBenefitsAmount(totalBenefitsAmount)
+        showTotalOrderAmountAfterDiscount(totalOrderAmount + totalBenefitsAmount, flag)
     }
 
     private fun showOrderedMenu() {
@@ -136,5 +137,13 @@ class EventPlannerController {
 
     private fun showTotalBenefitsAmount(totalBenefitsAmount: Int) {
         outputView.printTotalBenefitsAmount(totalBenefitsAmount)
+    }
+
+    private fun showTotalOrderAmountAfterDiscount(totalAmount: Int, flag: Boolean) {
+        if (flag) {
+            outputView.printTotalOrderAmountAfterDiscount(totalAmount + Values.PRICE_GIFT_EVENT.value)
+            return
+        }
+        outputView.printTotalOrderAmountAfterDiscount(totalAmount)
     }
 }

@@ -77,4 +77,9 @@ class OutputView {
         }
         printNone()
     }
+
+    fun printTotalOrderAmountAfterDiscount(totalAmount: Int) {
+        println("\n" + Texts.MESSAGE_TOTAL_ORDER_AMOUNT_AFTER_DISCOUNT.text)
+        println(String.format("%,d원", totalAmount))
+    }
 }
