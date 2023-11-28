@@ -1,4 +1,4 @@
-package christmas.model
+package christmas.model.menu
 
 enum class MenuInfo(val menuName: String, val price: Int) {
     TAPAS("타파스", 5_500),
