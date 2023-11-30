@@ -1,6 +1,7 @@
 package christmas.view
 
 import christmas.util.constant.Texts
+import christmas.util.constant.Values
 
 class OutputView {
 
@@ -45,28 +46,17 @@ class OutputView {
         printNone()
     }
 
-    fun printBenefitsDetail() {
+    fun printBenefitsDetail(benefitsMap: Map<String, Int>, totalOrderAmount: Int, totalBenefitsAmount: Int) {
         println("\n" + Texts.MESSAGE_BENEFITS_DETAIL.text)
-    }
-
-    fun printChristmasDiscount(discount: Int) {
-        println(Texts.MESSAGE_BENEFITS_CHRISTMAS.text + String.format("%,d원", discount))
-    }
-
-    fun printWeekendDiscount(discount: Int) {
-        println(Texts.MESSAGE_BENEFITS_WEEKEND.text + String.format("%,d원", discount))
-    }
-
-    fun printWeekdayDiscount(discount: Int) {
-        println(Texts.MESSAGE_BENEFITS_WEEKDAY.text + String.format("%,d원", discount))
-    }
-
-    fun printSpecialDiscount() {
-        println(Texts.MESSAGE_BENEFITS_SPECIAL.text)
-    }
-
-    fun printGiftEvent() {
-        println(Texts.MESSAGE_BENEFITS_GIFT.text)
+        if (totalOrderAmount < Values.PRICE_EVENT_THRESHOLD.value || totalBenefitsAmount == 0) {
+            printNone()
+            return
+        }
+        benefitsMap.forEach { (benefit, amount) ->
+            if (amount != 0) {
+                println("$benefit: " + String.format("%,d원", amount))
+            }
+        }
     }
 
     fun printTotalBenefitsAmount(totalBenefitsAmount: Int) {

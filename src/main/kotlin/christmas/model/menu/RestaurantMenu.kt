@@ -1,4 +1,4 @@
-package christmas.model
+package christmas.model.menu
 
 import christmas.util.constant.Texts
 import java.lang.IllegalArgumentException

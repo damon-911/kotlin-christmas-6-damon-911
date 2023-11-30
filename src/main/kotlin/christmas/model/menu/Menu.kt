@@ -1,4 +1,4 @@
-package christmas.model
+package christmas.model.menu
 
 data class Menu(
     val name: String,
